@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reviews</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: white;
+            background-color: black;
+            text-align: center;
+            font-family: 'Merriweather', serif;
+            height: 100%;
+            width: 100%;
+        }
+
+        .container-fluid {
+            margin-top: 200px !important
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 33px !important;
+            color: #fff
+        }
+
+        .small {
+            letter-spacing: 0.5px !important
+        }
+
+        .card {
+            box-shadow: 0px 5px 16px rgba(223, 241, 223, 0.5);
+            transition: 0.8s;
+            background: #333;
+            ;
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-radius: 7px !important
+        }
+
+        .card-header,
+        .card-footer {
+            border-radius: 7px !important
+        }
+
+        .card:after {
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 100%;
+            z-index: 9999;
+            height: 100%;
+            pointer-events: none
+        }
+
+        .card-title img {
+            z-index: 99999 !important
+        }
+
+        .card .layer {
+            position: absolute;
+            top: calc(100% - 5px);
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#03a9f4, #e91ee3);
+            left: 0;
+            z-index: 1;
+            transition: 0.5s
+        }
+
+        .card:hover {
+            box-shadow: -5px 50px 100px rgba(223, 241, 223, 0.5)
+        }
+
+        .card:hover hr {
+            background-color: #fff
+        }
+
+        .card:hover h4 {
+            font-weight: 600
+        }
+
+        .card:hover p {
+            font-weight: 600
+        }
+
+        .card:hover small {
+            font-weight: 600
+        }
+
+        .card:hover .layer {
+            top: 0
+        }
+
+        .card .content {
+            position: relative;
+            z-index: 2
+        }
+
+        h1 {
+            margin: 24px;
+            font-size: 55px;
+            font-weight: bold;
+            padding: 55px;
+        }
+
+        .card .content .img-1 {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white !important
+        }
+
+        .card h4 {
+            color: #fff;
+            font-weight: 500
+        }
+
+        hr {
+            background-color: black;
+            width: 80% !important;
+            transition: 1s
+        }
+
+        .bold {
+            font-weight: 500
+        }
+
+        #quotes {
+            opacity: 0.1;
+            filter: alpha(opacity=40)
+        }
+
+        @media (max-width: 479px) {
+            p {
+                padding: 0 !important
+            }
+
+            .img-1 {
+                margin-right: 0 !important
+            }
+        }
+
+        .slideshow-container {
+            position: relative;
+            background: black;
+        }
+
+        /* Slides */
+        .mySlides {
+            display: none;
+            padding: 80px;
+            text-align: center;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -30px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            position: absolute;
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            position: absolute;
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(61, 61, 61, 0.8);
+            color: white;
+        }
+
+        /* The dot/bullet/indicator container */
+        .dot-container {
+            text-align: center;
+            padding: 20px;
+            background: black;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 1px;
+            background-color: rgb(78, 77, 77);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        /* Add a background color to the active dot/circle */
+        .activedot,
+        .dot:hover {
+            background-color: white;
+        }
+
+        /* Add an italic font style to all quotes */
+        q {
+            font-style: italic;
+        }
+
+        /* Add a blue color to the author */
+        .author {
+            color: #03a9f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            <img src="/static/Images/logo-final1.png" width="45" height="45" alt="">
+        </a>
+        <a class="navbar-brand" href="/"><b>Khushi's Anime Reviews</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/">Home <span class="sr-only"></span></a>
+                <a class="nav-item nav-link" href="/#contactus"> Talk to Me <span class="sr-only"></span></a>
+                <a class="nav-item nav-link" href="/features">Monthly Features</a>
+                <a class="nav-item nav-link  active" href="/reviews">My Reviews</a>
+                <a class="nav-item nav-link" href="/updates">Updates</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Favourite Shows -->
+    <h1>Favourites</h1>
+    <div class="container my-5 justify-content-center">
+        <div class=" row justify-content-center ">
+            <div class="col-lg-6 col-12 mt-5 ">
+                <div class="card mt-3 ">
+                    <div class="layer"></div>
+                    <div class="content">
+                        <div class="card-header text-center border-0">
+                            <div class="row justify-content-center my-4">
+                                <div class="col">
+                                    <div
+                                        class="d-flex flex-lg-row flex-column-reverse no-gutters justify-content-center">
+                                        <div class="col-3 text-right"><img class="img-fluid" id="quotes"
+                                                src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"
+                                                width="110" height="110"></div>
+                                        <div class="col pr-lg-5"><img class=" img-1 mr-lg-5 "
+                                                src="/static/Images/Icons/Yuri.png"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center pb-3 ">
+                            <div class="row justify-content-center">
+                                <div class="col text-center justify-content-center ">
+                                    <p class="bold text-center px-md-3" style="font-size: 16px;">Such a cute show. I
+                                        truly fealt like comforted while watching this show. I have been going through
+                                        some things recently but watching this show made me so happy and it just
+                                        distracts me and helps me not think about everything. I also love most of the
+                                        music soundtrack and love how wholesome some of the characters are. I would’ve
+                                        never thought I would enjoy something like this especially since I have never
+                                        watched figure skating or anime. It’s an amazing show and I could watch it 10
+                                        more times and still not get bored of it.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-auto mb-4">
+                        <div class="card-footer text-center border-0 mt-0 pt-0 mb-3">
+                            <div class="row text-center name mt-auto ">
+                                <div class="col">
+                                    <h4 class="mb-0 Elizabeth">Yuri!!! On ICE</h4> <small class="mt-0 text-white">"I
+                                        want to Ice Skate Now!"</small>
+                                    <p><span class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star-half-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 mt-5 ">
+                <div class="card mt-3 ">
+                    <div class="layer"></div>
+                    <div class="content">
+                        <div class="card-header text-center border-0">
+                            <div class="row justify-content-center my-4">
+                                <div class="col">
+                                    <div
+                                        class="d-flex flex-lg-row flex-column-reverse no-gutters justify-content-center">
+                                        <div class="col-3 text-right"><img class="img-fluid" id="quotes"
+                                                src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"
+                                                width="110" height="110"></div>
+                                        <div class="col pr-lg-5"><img class=" img-1 mr-lg-5 "
+                                                src="/static/Images/Icons/deku.jfif"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center pb-3 ">
+                            <div class="row justify-content-center">
+                                <div class="col text-center justify-content-center ">
+                                    <p class="bold text-center px-md-3" style="font-size: 16px;"> Boku no Hero Academia
+                                        is the anime that got me into anime. I love the plot very much. The idea of a
+                                        super-human society and heroes is so fascinating! I wish I had a quirk too, I
+                                        wish I could become a hero too. This show made me believe that power or not, I
+                                        can be the one too. It is a full-pack show with awesomeness! Must Watch for all
+                                        Rookies.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-auto mb-4">
+                        <div class="card-footer text-center border-0 mt-0 pt-0 mb-3">
+                            <div class="row text-center name mt-auto ">
+                                <div class="col">
+                                    <h4 class="mb-0 Elizabeth">My Hero Academia</h4> <small
+                                        class="mt-0 text-white">"Young Man, you too can become a hero!" - All
+                                        Might</small>
+                                    <p><span class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5 justify-content-center">
+        <div class=" row justify-content-center ">
+            <div class="col-lg-6 col-12 mt-5 ">
+                <div class="card mt-3 ">
+                    <div class="layer"></div>
+                    <div class="content">
+                        <div class="card-header text-center border-0">
+                            <div class="row justify-content-center my-4">
+                                <div class="col">
+                                    <div
+                                        class="d-flex flex-lg-row flex-column-reverse no-gutters justify-content-center">
+                                        <div class="col-3 text-right"><img class="img-fluid" id="quotes"
+                                                src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"
+                                                width="110" height="110"></div>
+                                        <div class="col pr-lg-5"><img class=" img-1 mr-lg-5 "
+                                                src="/static/Images/Icons/yuji.jpg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center pb-3 ">
+                            <div class="row justify-content-center">
+                                <div class="col text-center justify-content-center ">
+                                    <p class="bold text-center px-md-3" style="font-size: 16px;">Jujutsu kaisen is the
+                                        year's best anime. The Screenplay keeps you engagaged in each and every episode
+                                        and a well executed adaptated manga. Pacing, Execution, Direction is pitch
+                                        perfect and will make you crave for more and more. Animation scenes and Art is
+                                        amazingly handled by MAPPA Studio.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-auto mb-4">
+                        <div class="card-footer text-center border-0 mt-0 pt-0 mb-3">
+                            <div class="row text-center name mt-auto ">
+                                <div class="col">
+                                    <h4 class="mb-0 Elizabeth">Jujutsu Kaisen</h4> <small
+                                        class="mt-0 text-white">"Hashitte koronde Kienai itami daite wa Sekai ga matteru
+                                        Kono isshun wo"</small>
+                                    <p><span class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star-half-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 mt-5 ">
+                <div class="card mt-3 ">
+                    <div class="layer"></div>
+                    <div class="content">
+                        <div class="card-header text-center border-0">
+                            <div class="row justify-content-center my-4">
+                                <div class="col">
+                                    <div
+                                        class="d-flex flex-lg-row flex-column-reverse no-gutters justify-content-center">
+                                        <div class="col-3 text-right"><img class="img-fluid" id="quotes"
+                                                src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"
+                                                width="110" height="110"></div>
+                                        <div class="col pr-lg-5"><img class=" img-1 mr-lg-5 "
+                                                src="/static/Images/Icons/eren.png"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center pb-3 ">
+                            <div class="row justify-content-center">
+                                <div class="col text-center justify-content-center ">
+                                    <p class="bold text-center px-md-3" style="font-size: 16px;"> Greatest TV show of
+                                        all time, the manga is incredible and I can’t wait for Season 4B. Eren Yeager is
+                                        probably one of the greatest characters in all of anime. Isayama took a big risk
+                                        with Eren’s character and it paid off. What better way to improve upon an
+                                        already flawed protagonist by pitting him against his friends. I don’t want to
+                                        call Eren an antagonist either, his motives are very understandable and he is so
+                                        well written. I hope Season 4B of the anime is filled with the same amount of
+                                        thrills as the manga gave me.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-auto mb-4">
+                        <div class="card-footer text-center border-0 mt-0 pt-0 mb-3">
+                            <div class="row text-center name mt-auto ">
+                                <div class="col">
+                                    <h4 class="mb-0 Elizabeth">Attack On Titan</h4> <small
+                                        class="mt-0 text-white">"Shinzou wo Sasageyo!"</small>
+                                    <p><span class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5 justify-content-center">
+        <div class=" row justify-content-center ">
+            <div class="col-lg-6 col-12 mt-5 ">
+                <div class="card mt-3 ">
+                    <div class="layer"></div>
+                    <div class="content">
+                        <div class="card-header text-center border-0">
+                            <div class="row justify-content-center my-4">
+                                <div class="col">
+                                    <div
+                                        class="d-flex flex-lg-row flex-column-reverse no-gutters justify-content-center">
+                                        <div class="col-3 text-right"><img class="img-fluid" id="quotes"
+                                                src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"
+                                                width="110" height="110"></div>
+                                        <div class="col pr-lg-5"><img class=" img-1 mr-lg-5 "
+                                                src="/static/Images/Icons/naruto.png"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center pb-3 ">
+                            <div class="row justify-content-center">
+                                <div class="col text-center justify-content-center ">
+                                    <p class="bold text-center px-md-3" style="font-size: 16px;">Naruto is definitely
+                                        worth watching! There are so many life lessons that you would learn while
+                                        watching the show that no school teaches you. Naruto is truly one of a kind,
+                                        it's just a bit too long, but all the episodes are worth the HYPE!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-auto mb-4">
+                        <div class="card-footer text-center border-0 mt-0 pt-0 mb-3">
+                            <div class="row text-center name mt-auto ">
+                                <div class="col">
+                                    <h4 class="mb-0 Elizabeth">Naruto & Naruto Shippuden</h4> <small
+                                        class="mt-0 text-white">"Dattebayo"</small>
+                                    <p><span class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star-half-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 mt-5 ">
+                <div class="card mt-3 ">
+                    <div class="layer"></div>
+                    <div class="content">
+                        <div class="card-header text-center border-0">
+                            <div class="row justify-content-center my-4">
+                                <div class="col">
+                                    <div
+                                        class="d-flex flex-lg-row flex-column-reverse no-gutters justify-content-center">
+                                        <div class="col-3 text-right"><img class="img-fluid" id="quotes"
+                                                src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"
+                                                width="110" height="110"></div>
+                                        <div class="col pr-lg-5"><img class=" img-1 mr-lg-5 "
+                                                src="/static/Images/Icons/tanjiro.jpg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body text-center pb-3 ">
+                            <div class="row justify-content-center">
+                                <div class="col text-center justify-content-center ">
+                                    <p class="bold text-center px-md-3" style="font-size: 16px;">
+                                        I would praise “Demon Slayer/Kimetsu No Yaiba” for its gorgeous animation,
+                                        particularly its dynamic action sequences where every frame feels like a piece
+                                        of art. The stunning visuals are a credit to ufotable, the animation studio
+                                        behind the anime adaptation. Also the whole is so sweet, I wish I had a brother
+                                        like Tanjiro</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-auto mb-4">
+                        <div class="card-footer text-center border-0 mt-0 pt-0 mb-3">
+                            <div class="row text-center name mt-auto ">
+                                <div class="col">
+                                    <h4 class="mb-0 Elizabeth">Kimetsu No Yaiba</h4> <small class="mt-0 text-white">"I
+                                        swear your big brother will save you no matter what!" - Tanjiro Kamado</small>
+                                    <p><span class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span><span
+                                            class="fa fa-star-o text-warning mr-1"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <!-- Other Reviews -->
+    <h1 style="padding: 35px;">Some Other Reviews</h1>
+    <p>Some shows that are definitely worth a try!</p>
+
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+
+        <!-- Full-width slides/quotes -->
+        <div class="mySlides">
+            <p class="author">Neon Genesis Evangelion</p>
+            <q>Only One Sentence, OLD IS GOLD! Plus the opening theme is so cool!</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">Tokyo Revengers</p>
+            <q>This show is gonna be a leading one in shonen for the next four years. Truly enjoyed it and loved
+                watching it! definitely gonna start reading the manga.</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">To Your Eterenity</p>
+            <q>It is a great slow burning show, the characters are unique and awesome. They have their own story and are
+                well developed. The animation steals the show to a great extend and all these things together makes the
+                show a total piece of awesomeness!</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">The Rising of the Shield Hero</p>
+            <q>I cant say anything more except this anime is PERFECTION and a MASTERPIECE !! Great Plot, Great Character
+                development.</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">Assassination Classroom</p>
+            <q>Assassination Classroom is a beautiful intricate storyline with real depth and I thoroughly enjoyed it.
+                Sadly a large chunk of season 2 feels like filler and that really damaged it but it returned to form in
+                it's final few episodes all leading the incredible finale.</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">5 centimeter per Second</p>
+            <q> If you like beautiful art and animation, plus a good story, then "5 Centimeters Per Second" is a
+                must-see. Even though it is only one hour long, the movie talks about heart-braking situations and
+                hidden feelings, things we can all relate to.</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">A Whisker Away</p>
+            <q>I expected no more than a cheesy drama but I was so wrong, i totally related with the girl and the lesson
+                taught was actually pretty human (talking about a movie with a cat huh? Lol), it's beautiful not only
+                with the plot but visually stunning it certainly is, give it a chance, it's totally worth it.</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">I want to eat your Pancreas</p>
+            <q>I really enjoyed the movie its emotional definitely but its also heartwarming and wholesome at the same
+                time. Overall a must watch.</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">Garden of Words</p>
+            <q>Overall, Garden of words is a really good piece of art. It's definitely filled with Makoto's signature
+                style and a definite recommendation to watch.</q>
+        </div>
+
+        <div class="mySlides">
+            <p class="author">Given</p>
+            <q>A very chill light weight music based anime. It was a beautiful journey.</q>
+        </div>
+
+        <!-- Next/prev buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <!-- Dots/bullets/indicators -->
+    <div class="dot-container">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+        <span class="dot" onclick="currentSlide(7)"></span>
+        <span class="dot" onclick="currentSlide(8)"></span>
+        <span class="dot" onclick="currentSlide(9)"></span>
+        <span class="dot" onclick="currentSlide(10)"></span>
+    </div>
+
+
+    <!-- Footer -->
+    <footer style="text-align: center;">
+        <br>
+        <div class="center"> Copyright &copy; Khushi's Anime Reviews 2021. All rights reserved. </div>
+    </footer>
+
+    <!-- Java Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" activedot", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " activedot";
+        }
+    </script>
+</body>
+
+</html>
