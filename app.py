@@ -43,10 +43,10 @@ def contact():
         feedback = request.form.get('feedback')
         # print(name, email, feedback)
         entry = contactus(name=name, email = email, feedback = feedback)
+        db.create_all()
         db.session.add(entry)
         db.session.commit()
     return render_template('home.html')
 
 if __name__=="__main__":
-    db.create_all()
     app.run(debug=True)
