@@ -2,8 +2,8 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/ps5'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://biawoyxnezotex:63f86296727f5f238ab5044c55e588d0fb0352ee80cb7b1e2847e9bb336a28a4@ec2-18-214-214-252.compute-1.amazonaws.com:5432/d2ordsesd5srav'
+app.config['DATABASE_URL'] = 'mysql://root:@localhost/ps5'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://biawoyxnezotex:63f86296727f5f238ab5044c55e588d0fb0352ee80cb7b1e2847e9bb336a28a4@ec2-18-214-214-252.compute-1.amazonaws.com:5432/d2ordsesd5srav'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
