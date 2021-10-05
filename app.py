@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+import click
+from flask.cli import with_appcontext
 
 app = Flask(__name__)
 app.config['DATABASE_URL'] = 'mysql://root:@localhost/ps5'
@@ -34,6 +36,11 @@ def reviews():
 @app.route("/updates")
 def updates():
     return render_template('404.html')
+
+@click.command(name='create_tables')
+@with_appcontext
+def create_tables():
+    db.create_all()
 
 @app.route("/contact", methods = ['GET', 'POST'])
 def contact():
